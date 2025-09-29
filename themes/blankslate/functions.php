@@ -1,5 +1,6 @@
 <?php
 
+//Carbon Fields Setup
 use Carbon_Fields\Container;
 use Carbon_Fields\Field;
 
@@ -20,6 +21,29 @@ add_action( 'after_setup_theme', function () {
         error_log('Carbon Fields: autoload.php not found at ABSPATH/vendor.');
     }
 }, 5 );
+
+//Vite Setup
+function mytheme_enqueue_assets() {
+    $theme_dir = get_stylesheet_directory_uri();
+
+    // CSS from Vite
+    wp_enqueue_style(
+        'mytheme-style',
+        $theme_dir . '/dist/style.css',
+        array(),
+        filemtime(get_stylesheet_directory() . '/dist/style.css')
+    );
+
+    // JS from Vite
+    wp_enqueue_script(
+        'mytheme-script',
+        $theme_dir . '/dist/main.js',
+        array(),
+        filemtime(get_stylesheet_directory() . '/dist/main.js'),
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'mytheme_enqueue_assets');
 
 add_action( 'after_setup_theme', 'blankslate_setup' );
 function blankslate_setup() {
