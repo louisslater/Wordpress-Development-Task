@@ -107,6 +107,7 @@ npm run build
 //Finally to make sure it works on your site you need to enqueue the dist/style.css with your site's existing style.css
 //To do this put this code in your functions.php
 
+
 add_action('wp_enqueue_scripts', function () {
 
     //Enqueue compiled main.scss from dist/style.css
