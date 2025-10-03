@@ -1,0 +1,265 @@
+// ====================================
+// Variables
+// ====================================
+:root {
+  --container: 1100px;
+  --space: 1.25rem;
+  --space-sm: 0.75rem;
+  --space-lg: 2rem;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --bg: #ffffff;
+  --bg-alt: #f9fafb;
+  --brand: #3b82f6;
+  --brand-dark: #1d4ed8;
+  --border: #e5e7eb;
+}
+
+$primary-colour: #3498db;
+$secondary-colour: #2ecc71;
+$text-colour: #333;
+$body-bg: #f9f9f9;
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// ====================================
+// Base styles
+// ====================================
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-stack;
+  background: $body-bg;
+  color: $text-colour;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.custom-logo {
+  width: 25%
+}
+
+@media only screen 
+and (min-device-width: 993px)
+{
+  .wp-post-image {
+    max-width: 25%
+  }
+}
+
+// ====================================
+// Layout
+// ====================================
+.container {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 0 var(--space);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+
+  @media (min-width: 1000px) {
+    grid-template-columns: 3fr 1fr;
+  }
+}
+
+// ====================================
+// Entry content
+// ====================================
+.entry-title,
+.entry-content {
+  margin: 0 auto;
+}
+
+.entry-title {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+// ====================================
+// Header
+// ====================================
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: $primary-colour;
+
+  .site-search {
+  margin-left: auto;
+
+  .search-form {
+    display: flex;
+    align-items: center;
+
+    .search-field {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      font-size: 1rem;
+    }
+
+    .search-submit {
+      padding: 0.5rem 1rem;
+      border: none;
+      background: $primary-colour;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: darken($primary-colour, 10%);
+      }
+    }
+  }
+  }
+
+  .brand {
+    display: flex;
+    gap: 0.5rem;
+    align-items: start;
+    padding: var(--space) 0;
+  }
+
+  .site-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .site-description {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+}
+
+// Nav
+.site-nav {
+  border-top: 1px solid var(--border);
+  background: var(--bg-alt);
+
+  .container {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.5rem var(--space);
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: #111827;
+
+    &:hover,
+    .current-menu-item > & {
+      background: #eaf2ff;
+    }
+  }
+}
+
+// ====================================
+// Content cards & posts
+// ====================================
+.card {
+  padding: var(--space);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+
+  h2 {
+    margin: 0.25rem 0;
+  }
+
+  .post-meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+}
+
+.post-item {
+  display: grid;
+  gap: 0.5rem;
+}
+
+// Gutenberg niceties
+.alignwide {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alignfull {
+  max-width: none;
+}
+
+// ====================================
+// Buttons & forms
+// ====================================
+.button,
+.wp-block-button__link,
+input[type="submit"] {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--brand);
+  background: var(--brand);
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--brand-dark);
+  }
+}
+
+.read-more {
+  margin-top: 0.5rem;
+}
+
+// ====================================
+// Sidebar
+// ====================================
+.widget,
+aside.sidebar {
+  padding: var(--space);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+  + .widget {
+    margin-top: var(--space);
+  }
+}
+
+// ====================================
+// Footer
+// ====================================
+.site-footer,
+footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-lg) 0;
+  color: var(--muted);
+  background: $primary-colour;
+  text-align: center;
+}

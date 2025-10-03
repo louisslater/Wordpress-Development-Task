@@ -2,6 +2,7 @@
 
 //Carbon Fields Setup
 use Carbon_Fields\Container;
+use Carbon_Fields\Block;
 use Carbon_Fields\Field;
 
 add_action( 'carbon_fields_register_fields', 'crb_attach_theme_options' );
@@ -10,7 +11,27 @@ function crb_attach_theme_options() {
         ->add_fields( array(
             Field::make( 'text', 'crb_text', 'Text Field' ),
         ) );
+
+    Block::make( __( 'Custom Content Block' ) )
+        ->add_fields( array(
+            Field::make( 'text', 'block_text', __( 'Block Text' ) ),
+            Field::make( 'image', 'block_image', __( 'Block Image' ) ),
+            Field::make( 'color', 'block_colour', __( 'Block Colour' ) ),
+        ) )
+        ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
+            ?>
+            <div class="custom-content-block" style="background-color: <?php echo esc_attr( $fields['block_colour'] ); ?>; padding:20px;">
+                <?php if ( ! empty( $fields['block_image'] ) ) : ?>
+                    <img src="<?php echo esc_url( wp_get_attachment_image_url( $fields['block_image'], 'large' ) ); ?>" alt="">
+                <?php endif; ?>
+                <?php if ( ! empty( $fields['block_text'] ) ) : ?>
+                    <p><?php echo esc_html( $fields['block_text'] ); ?></p>
+                <?php endif; ?>
+            </div>
+            <?php
+        } );
 }
+
 
 add_action( 'after_setup_theme', function () {
     $autoload = ABSPATH . 'vendor/autoload.php';
@@ -23,6 +44,7 @@ add_action( 'after_setup_theme', function () {
 }, 5 );
 
 //Vite Setup
+
 function mytheme_enqueue_assets() {
     $theme_dir = get_stylesheet_directory_uri();
 
@@ -43,7 +65,9 @@ function mytheme_enqueue_assets() {
         true
     );
 }
-add_action('wp_enqueue_scripts', 'mytheme_enqueue_assets');
+
+//add_action('wp_enqueue_scripts', 'mytheme_enqueue_assets');
+
 
 add_action( 'after_setup_theme', 'blankslate_setup' );
 function blankslate_setup() {

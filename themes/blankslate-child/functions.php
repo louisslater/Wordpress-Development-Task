@@ -1,9 +1,17 @@
 <?php
+
 // Enqueue parent + child styles
 add_action('wp_enqueue_scripts', function () {
     $parent = wp_get_theme('blankslate');
     wp_enqueue_style('blankslate-parent', get_template_directory_uri() . '/style.css', [], $parent->get('Version'));
-    wp_enqueue_style('blankslate-child', get_stylesheet_directory_uri() . '/style.css', ['blankslate-parent'], '1.0.0');
+    
+    //Enqueue compiled main.scss from dist/style.css
+    wp_enqueue_style(
+        'blankslate-child',
+        get_stylesheet_directory_uri() . '/dist/style.css', // compiled CSS
+        ['blankslate-parent'],
+        filemtime(get_stylesheet_directory() . '/dist/style.css') // cache busting
+    );
 });
 
 // Theme supports
