@@ -116,3 +116,10 @@ add_action('wp_enqueue_scripts', function () {
         get_stylesheet_directory_uri() . '/dist/style.css', // compiled CSS
     );
 });
+
+
+
+
+--challenges faced during development--
+Some of the challenges I faced whilst developing were setting up and utilising vite for sass this was challenging because I encountered some errors when it came to writing the scss I later found out these were due to incorrect paths in my php function.
+Another difficulty I found was finding the right web elements in the php to change in scss and alter the position, scale and other aspects of.
